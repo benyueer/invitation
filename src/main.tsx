@@ -8,7 +8,7 @@ import { tracker } from './utils/tracker.ts'
 tracker
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <App />
-  </StrictMode>,
+  // </StrictMode>,
 )

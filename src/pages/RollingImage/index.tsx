@@ -1,6 +1,6 @@
 'use client'
 
-import type { CameraAnimation, ParticleMesh } from '@/lib/variant-1/types'
+import type { CameraAnimation, ParticleMesh } from '@/pages/RollingImage/lib/variant-1/types'
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
@@ -8,15 +8,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Camera, Mesh, Program, Renderer, Texture, Transform } from 'ogl'
 
 import { useEffect, useRef, useState } from 'react'
-import Loader from '@/components/loader'
-import { cylinderConfig, imageConfig, images, particleConfig, perspectives } from '@/lib/variant-1/data'
-import { cylinderFragment, cylinderVertex, particleFragment, particleVertex } from '@/lib/variant-1/shaders'
+import Loader from '@/pages/RollingImage/components/loader'
+import { cylinderConfig, imageConfig, images, particleConfig, perspectives } from '@/pages/RollingImage/lib/variant-1/data'
+import { cylinderFragment, cylinderVertex, particleFragment, particleVertex } from '@/pages/RollingImage/lib/variant-1/shaders'
 import {
   createCylinderGeometry,
   createParticleGeometry,
   drawImageCover,
   getPositionClasses,
-} from '@/lib/variant-1/utils'
+} from '@/pages/RollingImage/lib/variant-1/utils'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, CustomEase, ScrollSmoother)
@@ -406,8 +406,8 @@ export default function RollingImage() {
           animate()
         }
       }
-      img.onerror = () => {
-        console.error('[v0] Failed to load image:', imageSrc)
+      img.onerror = (e) => {
+        console.error('[v0] Failed to load image:', imageSrc, e)
         setIsLoading(false)
       }
       img.src = imageSrc

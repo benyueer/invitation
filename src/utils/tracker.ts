@@ -76,6 +76,7 @@ export class Tracker {
     })
 
     navigator.sendBeacon(import.meta.env.VITE_TRACKER_REPORT_URL || '/receive-data', blob)
+    this.events = []
   }
 }
 
