@@ -167,13 +167,13 @@ export function animateGridItems(items: NodeListOf<HTMLElement>, clickedItem: HT
 
   gsap.to(items, {
     opacity: 0,
-    scale: (i, el) => (el === clickedItem ? 1 : 0.8),
-    duration: (i, el) =>
+    scale: (_i, el) => (el === clickedItem ? 1 : 0.8),
+    duration: (_i, el) =>
       el === clickedItem
         ? config.stepDuration * config.clickedItemDurationFactor
         : 0.3,
     ease: config.gridItemEase,
-    clipPath: (i, el) => (el === clickedItem ? clipPaths.from : 'none'),
+    clipPath: (_i, el) => (el === clickedItem ? clipPaths.from : 'none'),
     delay: i => delays[i],
   })
 }

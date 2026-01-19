@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import {
   animateGridItems,
   animateTransition,
@@ -87,12 +87,12 @@ export default function RepeatingImageTransition() {
   return (
     <div className="w-full h-full overflow-y-auto">
       {galleries.map((gallery, index) => (
-        <>
-          <div className="heading" key={index}>
+        <Fragment key={index}>
+          <div className="heading">
             <h2 className="heading__title">{gallery.title}</h2>
             <span className="heading__meta">{gallery.label}</span>
           </div>
-          <div key={index} className="grid">
+          <div className="grid">
             {gallery.images.map((image, index) => (
               <figure
                 className="grid__item"
@@ -116,7 +116,7 @@ export default function RepeatingImageTransition() {
               </figure>
             ))}
           </div>
-        </>
+        </Fragment>
       ))}
 
       <figure
