@@ -1,19 +1,7 @@
 import type { Perspective } from './types'
+import { randomPick } from '@/utils/imageData'
 
-export const images = [
-  '/img/1.jpg',
-  // './img/2.jpg',
-  // './img/3.jpg',
-  // './img/4.jpg',
-  // './img/1.jpg',
-  // './img/2.jpg',
-  // './img/3.jpg',
-  // './img/4.jpg',
-  // './img/1.jpg',
-  // './img/2.jpg',
-  // './img/3.jpg',
-  // './img/4.jpg',
-]
+export const images = randomPick('webp', 'high', 10, 'v')
 
 export const perspectives: Perspective[] = [
   {

@@ -1,1 +1,1 @@
-npx lint-staged
+cmd.exe /c "pnpm lint-staged"

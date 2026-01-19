@@ -1,11 +1,12 @@
 import gsap from 'gsap'
 
 import * as THREE from 'three'
+import { randomPick } from '@/utils/imageData'
+
 import centerfragment from './shaders/center-fragment.glsl'
-
 import centervertex from './shaders/center-vertex.glsl'
-import fragmentShader from './shaders/fragment.glsl'
 
+import fragmentShader from './shaders/fragment.glsl'
 import vertexShader from './shaders/vertex.glsl'
 
 interface Props {
@@ -64,28 +65,7 @@ export default class Gallery {
 
   async loadTextureAtlas() {
     // Define your image paths
-    const imagePaths = [
-      '/frames/512/p1.jpg',
-      '/frames/512/p2.jpg',
-      '/frames/512/p3.jpg',
-      '/frames/512/p4.jpg',
-      '/frames/512/p5.jpg',
-      '/frames/512/p6.jpg',
-      '/frames/512/p7.jpg',
-      '/frames/512/p8.jpg',
-      '/frames/512/p9.jpg',
-      '/frames/512/p10.jpg',
-      '/frames/512/p11.jpg',
-      '/frames/512/p12.jpg',
-      '/frames/512/p13.jpg',
-      '/frames/512/14.jpg',
-      '/frames/512/15.jpg',
-      '/frames/512/16.jpg',
-      '/frames/512/17.jpg',
-      '/frames/512/18.jpg',
-      '/frames/512/19.jpg',
-      '/frames/512/20.jpg',
-    ]
+    const imagePaths = randomPick('webp', 'high', 30, 'v')
 
     // Load all images first to get their dimensions
     const imagePromises = imagePaths.map((path) => {
@@ -265,7 +245,7 @@ export default class Gallery {
   }
 
   createCenteredMesh() {
-    const geometry = new THREE.PlaneGeometry(1.7, 2.3)
+    const geometry = new THREE.PlaneGeometry(2, 3)
     this.material = new THREE.ShaderMaterial({
       vertexShader: centervertex,
       fragmentShader: centerfragment,

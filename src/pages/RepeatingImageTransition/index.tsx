@@ -10,43 +10,26 @@ import {
   resetView,
 } from './config'
 import './base.css'
+import { randomPick } from '@/utils/imageData'
 
 const galleries = [
   {
-    title: '1',
-    label: '1',
-    images: [
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-      {
-        url: 'img/1.jpg',
-        title: '1',
-        label: '1',
-      },
-    ],
+    title: '红',
+    label: '喜庆的红色',
+    images: randomPick('webp', 'high', 16, 'v', 'theme1').map(i => ({
+      url: i,
+      title: 'title',
+      label: 'label',
+    })),
+  },
+  {
+    title: '蓝',
+    label: '赛里木的蓝',
+    images: randomPick('webp', 'high', 16, 'v', 'theme2').map(i => ({
+      url: i,
+      title: 'title',
+      label: 'label',
+    })),
   },
 ]
 

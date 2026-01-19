@@ -2,6 +2,7 @@ import type { Size } from './types/types'
 import gsap from 'gsap'
 import normalizeWheel from 'normalize-wheel'
 import * as THREE from 'three'
+import { randomPick } from '@/utils/imageData'
 import fragmentShader from './shaders/fragment.glsl'
 import vertexShader from './shaders/vertex.glsl'
 
@@ -173,21 +174,7 @@ export default class Magazine {
 
   async loadTextureAtlas() {
     // Define your image paths
-    const imagePaths = [
-      '/512/p1.jpg',
-      '/512/p2.jpg',
-      '/512/p3.jpg',
-      '/512/p4.jpg',
-      '/512/p5.jpg',
-      '/512/p6.jpg',
-      '/512/p7.jpg',
-      '/512/p8.jpg',
-      '/512/p9.jpg',
-      '/512/p10.jpg',
-      '/512/p11.jpg',
-      '/512/p12.jpg',
-      '/512/p13.jpg',
-    ]
+    const imagePaths = randomPick('webp', 'high', 30)
 
     // Load all images first to get their dimensions
     const imagePromises = imagePaths.map((path) => {
