@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import NotFound from '../pages/NotFound'
 import RollingImage from '../pages/RollingImage'
 import VortexGallery from '../pages/VortexGallery'
+import InfinityCanvas from '../pages/InfinityCanvas'
 
 export const showPages = [
   {
@@ -28,6 +29,11 @@ export const showPages = [
     path: '/hero',
     element: <Hero />,
   },
+  {
+    name: 'Infinity Canvas',
+    path: '/infinity-canvas',
+    element: <InfinityCanvas />,
+  }
 ]
 
 export const router = createBrowserRouter([
