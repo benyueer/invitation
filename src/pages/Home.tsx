@@ -1,20 +1,5 @@
 import { Link } from 'react-router-dom'
-
-const pages = [
-  {
-    title: '1',
-    path: '/repeating-image-transition',
-  },
-  {
-    title: '2',
-    path: '/rolling-image',
-  },
-  {
-    title: '3',
-    path: '/vortex-gallery',
-  },
-]
-
+import { showPages as pages } from '../router'
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center py-20">
@@ -22,10 +7,10 @@ export default function Home() {
         Welcome to Invitation App
       </h1>
       <div>
-        {pages.map((page) => (
+        {pages.map(page => (
           <p>
             <Link key={page.path} to={page.path}>
-              {page.title}
+              {page.name}
             </Link>
           </p>
         ))}

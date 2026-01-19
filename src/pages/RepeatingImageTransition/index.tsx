@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import "./base.css";
+import { useRef, useState } from 'react'
 import {
   animateGridItems,
   animateTransition,
@@ -9,80 +8,81 @@ import {
   extractItemData,
   positionPanelBasedOnClick,
   resetView,
-} from "./config";
+} from './config'
+import './base.css'
 
 const galleries = [
   {
-    title: "1",
-    label: "1",
+    title: '1',
+    label: '1',
     images: [
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
       {
-        url: "img/1.jpg",
-        title: "1",
-        label: "1",
+        url: 'img/1.jpg',
+        title: '1',
+        label: '1',
       },
     ],
   },
-];
+]
 
 export default function RepeatingImageTransition() {
-  const [currentItem, setCurrentItem] = useState<HTMLElement | null>(null);
+  const [currentItem, setCurrentItem] = useState<HTMLElement | null>(null)
   const [panelContent, setPanelContent] = useState({
-    imgURL: "",
-    title: "",
-    desc: "",
-  });
-  const panel = useRef<HTMLDivElement>(null);
+    imgURL: '',
+    title: '',
+    desc: '',
+  })
+  const panel = useRef<HTMLDivElement>(null)
 
   const onGridItemClick = (item: HTMLElement) => {
-    setCurrentItem(item);
+    setCurrentItem(item)
 
-    const overrides = extractItemConfigOverrides(item);
-    Object.assign(config, overrides);
+    const overrides = extractItemConfigOverrides(item)
+    Object.assign(config, overrides)
 
     // Position the panel, with updated config
-    positionPanelBasedOnClick(panel.current!, item);
+    positionPanelBasedOnClick(panel.current!, item)
 
-    const { imgURL, title, desc } = extractItemData(item);
-    setPanelContent({ imgURL, title: title!, desc: desc! });
+    const { imgURL, title, desc } = extractItemData(item)
+    setPanelContent({ imgURL, title: title!, desc: desc! })
 
-    const allItems = document.querySelectorAll(".grid__item");
+    const allItems = document.querySelectorAll('.grid__item')
     const delays = computeStaggerDelays(
       item,
       allItems as NodeListOf<HTMLElement>,
-    );
-    animateGridItems(allItems as NodeListOf<HTMLElement>, item, delays);
+    )
+    animateGridItems(allItems as NodeListOf<HTMLElement>, item, delays)
     animateTransition(
-      item.querySelector(".grid__item-image") as HTMLElement,
-      panel.current?.querySelector(".panel__img") as HTMLElement,
+      item.querySelector('.grid__item-image') as HTMLElement,
+      panel.current?.querySelector('.panel__img') as HTMLElement,
       imgURL,
-    );
-  };
+    )
+  }
 
   return (
     <div className="w-full h-full overflow-y-auto">
@@ -99,12 +99,13 @@ export default function RepeatingImageTransition() {
                 role="img"
                 aria-labelledby={`caption${index}`}
                 key={index}
-                onClick={(e) => onGridItemClick(e.currentTarget as HTMLElement)}
+                onClick={e => onGridItemClick(e.currentTarget as HTMLElement)}
               >
                 <div
                   className="grid__item-image"
                   style={{ backgroundImage: `url(${image.url})` }}
-                ></div>
+                >
+                </div>
                 <figcaption
                   className="grid__item-caption"
                   id={`caption${index}`}
@@ -127,7 +128,8 @@ export default function RepeatingImageTransition() {
         <div
           className="panel__img"
           style={{ backgroundImage: panelContent.imgURL }}
-        ></div>
+        >
+        </div>
         <figcaption className="panel__content" id="caption">
           <h3>{panelContent.title}</h3>
           <p>{panelContent.desc}</p>
@@ -142,5 +144,5 @@ export default function RepeatingImageTransition() {
         </figcaption>
       </figure>
     </div>
-  );
+  )
 }
