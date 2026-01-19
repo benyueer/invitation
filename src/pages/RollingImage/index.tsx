@@ -1,6 +1,9 @@
 'use client'
 
-import type { CameraAnimation, ParticleMesh } from '@/pages/RollingImage/lib/variant-1/types'
+import type {
+  CameraAnimation,
+  ParticleMesh,
+} from '@/pages/RollingImage/lib/variant-1/types'
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
@@ -9,8 +12,19 @@ import { Camera, Mesh, Program, Renderer, Texture, Transform } from 'ogl'
 
 import { useEffect, useRef, useState } from 'react'
 import Loader from '@/pages/RollingImage/components/loader'
-import { cylinderConfig, imageConfig, images, particleConfig, perspectives } from '@/pages/RollingImage/lib/variant-1/data'
-import { cylinderFragment, cylinderVertex, particleFragment, particleVertex } from '@/pages/RollingImage/lib/variant-1/shaders'
+import {
+  cylinderConfig,
+  imageConfig,
+  images,
+  particleConfig,
+  perspectives,
+} from '@/pages/RollingImage/lib/variant-1/data'
+import {
+  cylinderFragment,
+  cylinderVertex,
+  particleFragment,
+  particleVertex,
+} from '@/pages/RollingImage/lib/variant-1/shaders'
 import {
   createCylinderGeometry,
   createParticleGeometry,
@@ -46,8 +60,14 @@ export default function RollingImage() {
   const momentumRef = useRef(0)
 
   useEffect(() => {
-    if (!canvasRef.current || !containerRef.current || !smoothWrapperRef.current || !smoothContentRef.current)
+    if (
+      !canvasRef.current
+      || !containerRef.current
+      || !smoothWrapperRef.current
+      || !smoothContentRef.current
+    ) {
       return
+    }
 
     const smoother = ScrollSmoother.create({
       wrapper: smoothWrapperRef.current,
@@ -55,6 +75,8 @@ export default function RollingImage() {
       smooth: 4,
       effects: false,
       smoothTouch: 0.1,
+      normalizeScroll: true,
+      ignoreMobileResize: true,
     })
 
     const renderer = new Renderer({
@@ -126,13 +148,16 @@ export default function RollingImage() {
     canvas.width = Math.floor(totalWidthOriginal * scale)
     canvas.height = Math.floor(heightOriginal * scale)
 
-    console.log(`[Optimization] Device Limit: ${hardwareLimit}px | Safe Used: ${safeLimit}px | Scale: ${scale}`)
+    console.log(
+      `[Optimization] Device Limit: ${hardwareLimit}px | Safe Used: ${safeLimit}px | Scale: ${scale}`,
+    )
 
     let loadedImages = 0
     const imageElements: HTMLImageElement[] = []
 
     const circumference = 2 * Math.PI * cylinderConfig.radius
-    const textureAspectRatio = imageConfig.height / (imageConfig.width * images.length)
+    const textureAspectRatio
+      = imageConfig.height / (imageConfig.width * images.length)
     const idealHeight = circumference * textureAspectRatio
     const heightCorrection = idealHeight / cylinderConfig.height
 
@@ -157,11 +182,20 @@ export default function RollingImage() {
         )
 
         // Update initial camera z position for proper framing
-        if (cameraAnimRef.current.z === 8 || cameraAnimRef.current.z === 7 || cameraAnimRef.current.z === 6) {
+        if (
+          cameraAnimRef.current.z === 8
+          || cameraAnimRef.current.z === 7
+          || cameraAnimRef.current.z === 6
+        ) {
           cameraAnimRef.current.z = newDimensions.cameraZ
         }
 
-        console.log('[v0] Resized - Scale:', newDimensions.cylinderScale, 'Camera Z:', newDimensions.cameraZ)
+        console.log(
+          '[v0] Resized - Scale:',
+          newDimensions.cylinderScale,
+          'Camera Z:',
+          newDimensions.cameraZ,
+        )
       }
     }
 
@@ -185,14 +219,7 @@ export default function RollingImage() {
             const xEnd = Math.floor(xEndExact)
 
             const drawWidthActual = xEnd - xPos
-            drawImageCover(
-              ctx,
-              img,
-              xPos,
-              0,
-              drawWidthActual,
-              canvasHeight,
-            )
+            drawImageCover(ctx, img, xPos, 0, drawWidthActual, canvasHeight)
           })
 
           const texture = new Texture(gl, {
@@ -219,7 +246,11 @@ export default function RollingImage() {
           const cylinder = new Mesh(gl, { geometry, program })
           cylinder.setParent(scene)
           cylinder.rotation.y = 0.5
-          cylinder.scale.set(dimensions.cylinderScale, dimensions.cylinderScale, dimensions.cylinderScale)
+          cylinder.scale.set(
+            dimensions.cylinderScale,
+            dimensions.cylinderScale,
+            dimensions.cylinderScale,
+          )
           cylinderRef.current = cylinder
 
           setIsLoading(false)
@@ -353,7 +384,11 @@ export default function RollingImage() {
           const animate = () => {
             requestAnimationFrame(animate)
 
-            camera.position.set(cameraAnimRef.current.x, cameraAnimRef.current.y, cameraAnimRef.current.z)
+            camera.position.set(
+              cameraAnimRef.current.x,
+              cameraAnimRef.current.y,
+              cameraAnimRef.current.z,
+            )
             camera.lookAt([0, 0, 0])
 
             if (cylinderRef.current) {
@@ -364,7 +399,9 @@ export default function RollingImage() {
               const inertiaFactor = 0.15
               const decayFactor = 0.92
 
-              momentumRef.current = momentumRef.current * decayFactor + velocityRef.current * inertiaFactor
+              momentumRef.current
+                = momentumRef.current * decayFactor
+                  + velocityRef.current * inertiaFactor
 
               const speed = Math.abs(velocityRef.current) * 100
 
@@ -374,17 +411,23 @@ export default function RollingImage() {
               particlesRef.current.forEach((particle) => {
                 const userData = particle.userData
 
-                const targetOpacity = isRotating ? Math.min(speed * 3, 0.95) : 0
-                const currentOpacity = particle.program.uniforms.uOpacity.value as number
-                particle.program.uniforms.uOpacity.value = currentOpacity + (targetOpacity - currentOpacity) * 0.15
+                const targetOpacity = isRotating
+                  ? Math.min(speed * 3, 0.95)
+                  : 0
+                const currentOpacity = particle.program.uniforms.uOpacity
+                  .value as number
+                particle.program.uniforms.uOpacity.value
+                  = currentOpacity + (targetOpacity - currentOpacity) * 0.15
 
                 if (isRotating) {
-                  const rotationOffset = velocityRef.current * userData.speed * 1.5
+                  const rotationOffset
+                    = velocityRef.current * userData.speed * 1.5
                   const newBaseAngle = userData.baseAngle + rotationOffset
                   userData.baseAngle = newBaseAngle
 
                   const segments = particleConfig.segments
-                  const positions = particle.geometry.attributes.position.data as Float32Array
+                  const positions = particle.geometry.attributes.position
+                    .data as Float32Array
 
                   for (let j = 0; j <= segments; j++) {
                     const t = j / segments
@@ -422,10 +465,18 @@ export default function RollingImage() {
 
   return (
     <>
-      <Loader isLoading={isLoading} className="bg-[#000]" classNameLoader="bg-[#fff]" />
+      <Loader
+        isLoading={isLoading}
+        className="bg-[#000]"
+        classNameLoader="bg-[#fff]"
+      />
 
       <div className="fixed inset-0 w-full h-screen z-0">
-        <canvas ref={canvasRef} className="w-full h-full" style={{ display: 'block' }} />
+        <canvas
+          ref={canvasRef}
+          className="w-full h-full"
+          style={{ display: 'block' }}
+        />
       </div>
 
       <div className="fixed inset-0 pointer-events-none z-10 text-white">
@@ -437,8 +488,12 @@ export default function RollingImage() {
             }}
             className={`absolute text-center opacity-0 max-md:w-full ${getPositionClasses(perspective.position)}`}
           >
-            <h2 className="text-7xl font-[300] max-md:text-3xl leading-[0.8]">{perspective.title}</h2>
-            <p className="text-2xl font-[300] max-md:text-base opacity-50 mt-2">{perspective.description}</p>
+            <h2 className="text-7xl font-[300] max-md:text-3xl leading-[0.8]">
+              {perspective.title}
+            </h2>
+            <p className="text-2xl font-[300] max-md:text-base opacity-50 mt-2">
+              {perspective.description}
+            </p>
           </div>
         ))}
       </div>
