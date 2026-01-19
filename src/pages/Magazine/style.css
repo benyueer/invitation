@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Aeonik";
+  src: url("../public/Aeonik\ TRIAL/AeonikTRIAL-Regular.otf");
+}
+
+#webgl {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  height: 100dvh;
+}
+
+#app {
+  min-height: 100dvh;
+  z-index: 10;
+  position: relative;
+}
+
+[data-page] {
+  --turn-page: 0;
+  --data-page-index: 0;
+
+  --delta-index: calc(
+    (var(--data-current-page-index) - var(--data-page-index))
+  );
+
+  transform: rotate(calc(-180deg * var(--turn-page)))
+    translateY(calc(-4px * (var(--delta-index) * 2 - 1) * var(--turn-page)));
+}

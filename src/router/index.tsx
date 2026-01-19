@@ -4,6 +4,7 @@ import RepeatingImageTransition from '@/pages/RepeatingImageTransition'
 import MainLayout from '../layout/MainLayout'
 import Home from '../pages/Home'
 import InfinityCanvas from '../pages/InfinityCanvas'
+import Magazine from '../pages/Magazine'
 import NotFound from '../pages/NotFound'
 import RollingImage from '../pages/RollingImage'
 import VortexGallery from '../pages/VortexGallery'
@@ -33,6 +34,11 @@ export const showPages = [
     name: 'Infinity Canvas',
     path: '/infinity-canvas',
     element: <InfinityCanvas />,
+  },
+  {
+    name: 'Magazine',
+    path: '/magazine',
+    element: <Magazine />,
   },
 ]
 
