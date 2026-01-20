@@ -138,7 +138,7 @@ void main()
     vec3 rotatedPosition = getYrotationMatrix(yAngle) * translatedPosition;        
 
     rotatedPosition.z -= uSplitProgress * 5. * (1. - straightenInfluence);
-    rotatedPosition.z += uSplitProgress * 2. * straightenInfluence;
+    rotatedPosition.z += uSplitProgress * 3.5 * straightenInfluence;
 
     
     float initialRotationProgress = remap(uProgress,0.,0.15);

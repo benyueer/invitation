@@ -29,7 +29,7 @@ export default function Magazine() {
   }, [])
 
   return (
-    <div className="h-[100dvh] text-amber-50/60 flex flex-col justify-between relative z-10">
+    <div className="h-[100dvh] text-amber-50/60 flex flex-col justify-between relative z-10 bg-[rgb(232_220_207)]">
       <canvas id="webgl"></canvas>
     </div>
   )
