@@ -20,7 +20,7 @@ export const perspectives: Perspective[] = [
     position: 'center',
   },
   {
-    title: '我们很高兴',
+    title: 'welcome to our wedding',
     position: 'bottom',
   },
 ]

@@ -7,7 +7,7 @@ import './style.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function App() {
+export default function Magazine() {
   const canvas = useRef<Canvas | null>(null)
   const scroll = useRef<Scroll | null>(null)
 

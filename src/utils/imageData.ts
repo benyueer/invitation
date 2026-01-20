@@ -58,7 +58,6 @@ export const images = [
   'v/theme2/IMG_1497.',
   'v/theme2/IMG_1498.',
   'v/theme2/IMG_1499.',
-  'v/theme2/IMG_1500.',
   'v/theme2/IMG_1501.',
   'v/theme2/IMG_1503.',
   'v/theme2/IMG_1504.',

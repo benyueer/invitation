@@ -1,8 +1,8 @@
-import { randomPick } from '@/utils/imageData'
 import gsap from 'gsap'
 import * as React from 'react'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { randomPick } from '@/utils/imageData'
 
 interface HeroProps {
   isDarkMode?: boolean

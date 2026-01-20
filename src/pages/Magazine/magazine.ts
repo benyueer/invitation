@@ -174,7 +174,7 @@ export default class Magazine {
 
   async loadTextureAtlas() {
     // Define your image paths
-    const imagePaths = randomPick('webp', 'high', 30)
+    const imagePaths = randomPick('webp', 'high', 20, 'v')
 
     // Load all images first to get their dimensions
     const imagePromises = imagePaths.map((path) => {

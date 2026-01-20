@@ -16,6 +16,6 @@ export default function VortexGallery() {
   }, [])
 
   return (
-    <canvas id="webgl" className="fixed inset-0 top-0 left-0"></canvas>
+    <canvas id="webgl" className="absolute inset-0 top-0 left-0"></canvas>
   )
 }

@@ -12,8 +12,8 @@ export default function App() {
     artist: '',
     year: '',
     link: '',
-    width: item.indexOf('v') > -1 ? 335 : 512,
-    height: item.indexOf('v') > -1 ? 512 : 335,
+    width: item.includes('v') ? 335 : 512,
+    height: item.includes('v') ? 512 : 335,
   })))
   const [textureProgress, setTextureProgress] = React.useState(0)
 

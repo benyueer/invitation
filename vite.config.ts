@@ -45,27 +45,27 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('three') || id.includes('@react-three')) {
-              return 'three-vendor'
-            }
-            if (id.includes('antd') || id.includes('@ant-design')) {
-              return 'antd-vendor'
-            }
-            if (id.includes('gsap')) {
-              return 'gsap-vendor'
-            }
-            return 'vendor'
-          }
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
-      },
-    },
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks(id) {
+    //       if (id.includes('node_modules')) {
+    //         if (id.includes('three') || id.includes('@react-three')) {
+    //           return 'three-vendor'
+    //         }
+    //         if (id.includes('antd') || id.includes('@ant-design')) {
+    //           return 'antd-vendor'
+    //         }
+    //         if (id.includes('gsap')) {
+    //           return 'gsap-vendor'
+    //         }
+    //         return 'vendor'
+    //       }
+    //     },
+    //     chunkFileNames: 'assets/js/[name]-[hash].js',
+    //     entryFileNames: 'assets/js/[name]-[hash].js',
+    //     assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+    //   },
+    // },
     chunkSizeWarningLimit: 1000,
   },
 })

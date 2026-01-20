@@ -89,13 +89,13 @@ export default function RepeatingImageTransition() {
                   style={{ backgroundImage: `url(${image.url})` }}
                 >
                 </div>
-                <figcaption
+                {/* <figcaption
                   className="rgrid__item-caption"
                   id={`caption${index}`}
                 >
                   <h3>{image.title}</h3>
                   <p>{image.label}</p>
-                </figcaption>
+                </figcaption> */}
               </figure>
             ))}
           </div>
@@ -114,8 +114,8 @@ export default function RepeatingImageTransition() {
         >
         </div>
         <figcaption className="panel__content" id="caption">
-          <h3>{panelContent.title}</h3>
-          <p>{panelContent.desc}</p>
+          {/* <h3>{panelContent.title}</h3>
+          <p>{panelContent.desc}</p> */}
           <button
             type="button"
             className="panel__close"
