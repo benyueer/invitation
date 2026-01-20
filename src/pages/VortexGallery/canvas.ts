@@ -25,6 +25,7 @@ export default class Canvas {
   touchStartY: number = 0
   touchStartX: number = 0
   initialPinchDistance: number | null = null
+  handlers: any[] = []
 
   constructor() {
     this.element = document.getElementById('webgl') as HTMLCanvasElement
@@ -179,13 +180,27 @@ export default class Canvas {
   }
 
   addEventListeners() {
-    window.addEventListener('mousemove', this.onMouseMove.bind(this))
-    window.addEventListener('resize', this.onResize.bind(this))
-    window.addEventListener('wheel', this.onWheel.bind(this))
+    const a = this.onMouseMove.bind(this)
+    const b = this.onResize.bind(this)
+    const c = this.onWheel.bind(this)
+    const d = this.onTouchStart.bind(this)
+    const e = this.onTouchMove.bind(this)
+    const f = this.onTouchEnd.bind(this)
+    this.handlers.push(a, b, c, d, e, f)
 
-    window.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: false })
-    window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false })
-    window.addEventListener('touchend', this.onTouchEnd.bind(this))
+    window.addEventListener('mousemove', a)
+    window.addEventListener('resize', b)
+    window.addEventListener('wheel', c)
+
+    window.addEventListener('touchstart', d, { passive: false })
+    window.addEventListener('touchmove', e, { passive: false })
+    window.addEventListener('touchend', f)
+  }
+
+  removeEventListeners() {
+    ['mousemove', 'resize', 'whell', 'touchstart', 'touchmove', 'touchend'].forEach((name, index) => {
+      window.removeEventListener(name, this.handlers[index])
+    })
   }
 
   onResize() {
@@ -243,5 +258,11 @@ export default class Canvas {
     this.gallery!.render(this.time)
 
     this.renderer!.render(this.scene!, this.camera!)
+  }
+
+  destory() {
+    this.removeEventListeners()
+    this.orbitControls?.dispose()
+    this.renderer?.dispose()
   }
 }

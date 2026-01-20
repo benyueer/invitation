@@ -6,6 +6,10 @@ import { fileURLToPath } from 'node:url'
 import { isMainThread, parentPort, Worker } from 'node:worker_threads'
 import sharp from 'sharp'
 
+/**
+ * node script/compress-images.js inputdir webp 800 outdir
+ */
+
 const __filename = fileURLToPath(import.meta.url)
 
 /**

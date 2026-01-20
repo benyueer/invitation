@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import Canvas from './canvas'
-import './style.css'
 
 export default function VortexGallery() {
   const canvasRef = useRef<Canvas | null>(null)
@@ -12,9 +11,11 @@ export default function VortexGallery() {
   useEffect(() => {
     canvasRef.current = new Canvas()
     render()
+
+    return () => canvasRef.current?.destory()
   }, [])
 
   return (
-    <canvas id="webgl"></canvas>
+    <canvas id="webgl" className="fixed inset-0 top-0 left-0"></canvas>
   )
 }

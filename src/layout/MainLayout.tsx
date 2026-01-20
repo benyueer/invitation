@@ -6,13 +6,12 @@ export default function MainLayout() {
   const location = useLocation()
 
   const back = () => {
-    console.log('back')
     navigate(-1)
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-      <main className="container h-screen mx-auto px-4 py-8">
+    <div className=" bg-gray-50 text-gray-900 font-sans">
+      <main className="container mx-auto">
         {location.pathname !== '/' && (
           <div
             className="fixed top-2 left-2 flex justify-between items-center gap-0 cursor-pointer z-[9999]"

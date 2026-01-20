@@ -1,4 +1,5 @@
 import { Fragment, useRef, useState } from 'react'
+import { randomPick } from '@/utils/imageData'
 import {
   animateGridItems,
   animateTransition,
@@ -10,7 +11,6 @@ import {
   resetView,
 } from './config'
 import './base.css'
-import { randomPick } from '@/utils/imageData'
 
 const galleries = [
   {
@@ -54,43 +54,43 @@ export default function RepeatingImageTransition() {
     const { imgURL, title, desc } = extractItemData(item)
     setPanelContent({ imgURL, title: title!, desc: desc! })
 
-    const allItems = document.querySelectorAll('.grid__item')
+    const allItems = document.querySelectorAll('.rgrid__item')
     const delays = computeStaggerDelays(
       item,
       allItems as NodeListOf<HTMLElement>,
     )
     animateGridItems(allItems as NodeListOf<HTMLElement>, item, delays)
     animateTransition(
-      item.querySelector('.grid__item-image') as HTMLElement,
+      item.querySelector('.rgrid__item-image') as HTMLElement,
       panel.current?.querySelector('.panel__img') as HTMLElement,
       imgURL,
     )
   }
 
   return (
-    <div className="w-full h-full overflow-y-auto">
-      {galleries.map((gallery, index) => (
-        <Fragment key={index}>
+    <div className="w-full h-screen overflow-y-auto">
+      {galleries.map(gallery => (
+        <Fragment key={gallery.title}>
           <div className="heading">
             <h2 className="heading__title">{gallery.title}</h2>
             <span className="heading__meta">{gallery.label}</span>
           </div>
-          <div className="grid">
+          <div className="rgrid">
             {gallery.images.map((image, index) => (
               <figure
-                className="grid__item"
+                className="rgrid__item"
                 role="img"
                 aria-labelledby={`caption${index}`}
-                key={index}
+                key={image.title}
                 onClick={e => onGridItemClick(e.currentTarget as HTMLElement)}
               >
                 <div
-                  className="grid__item-image"
+                  className="rgrid__item-image"
                   style={{ backgroundImage: `url(${image.url})` }}
                 >
                 </div>
                 <figcaption
-                  className="grid__item-caption"
+                  className="rgrid__item-caption"
                   id={`caption${index}`}
                 >
                   <h3>{image.title}</h3>

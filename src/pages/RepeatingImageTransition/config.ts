@@ -113,7 +113,7 @@ export function positionPanelBasedOnClick(panel: HTMLElement, clickedItem: HTMLE
 }
 
 export function extractItemData(item: HTMLElement) {
-  const imgDiv = item.querySelector('.grid__item-image')
+  const imgDiv = item.querySelector('.rgrid__item-image')
   const caption = item.querySelector('figcaption')
   return {
     imgURL: (imgDiv as HTMLElement)?.style.backgroundImage,
@@ -309,7 +309,7 @@ export function animateTransition(startEl: HTMLElement, endEl: HTMLElement, imgU
       )
   })
 
-  const grid = document.querySelector('.grid')!
+  const grid = document.querySelector('.rgrid')!
 
   // Insert all movers at once
   grid.parentNode!.insertBefore(fragment, grid.nextSibling)
@@ -376,7 +376,7 @@ export function resetView(item: HTMLElement) {
     return
   isAnimating = true
 
-  const allItems = document.querySelectorAll('.grid__item')!
+  const allItems = document.querySelectorAll('.rgrid__item')!
   const delays = computeStaggerDelays(item, allItems as NodeListOf<HTMLElement>)
 
   const panel = document.querySelector('.panel')!
