@@ -1,6 +1,10 @@
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
 async function getBrowserId() {
+  const lastId = localStorage.getItem('tracker_browser_id')
+  if (lastId) {
+    return lastId
+  }
   const fpPromise = FingerprintJS.load()
 
   const fp = await fpPromise

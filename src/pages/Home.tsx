@@ -48,6 +48,7 @@ const CARDS = [
   { name: '宾客须知', path: '/infinity-canvas', icon: <FileTextOutlined /> },
   { name: '婚礼签到', path: '/rolling-image', icon: <FormOutlined /> },
   { name: '祝福留言', path: '/magazine', icon: <MessageOutlined /> },
+  { name: '动画', path: '/anmi', icon: <MessageOutlined /> },
 ]
 
 export default function Home() {

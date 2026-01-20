@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import Anmi from '@/pages/Anmi'
 import MainLayout from '../layout/MainLayout'
 
 const Home = lazy(() => import('../pages/Home'))
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: withSuspense(Home),
+      },
+      {
+        path: '/anmi',
+        element: withSuspense(Anmi),
       },
       ...showPages,
       {
