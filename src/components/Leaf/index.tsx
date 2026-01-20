@@ -358,15 +358,14 @@ function Leaf(props: any, ref: any) {
   const worldHeightRef = useRef<number>(0)
   const worldWidthRef = useRef<number>(100)
 
-  const [tendrils, setTendrils] = useState<Tendril[]>([])
+  const tendrils = useRef<Tendril[]>([])
   const [showed, setShowed] = useState(false)
 
   const showAll = () => {
     if (showed)
       return
-    const tendrils = []
     for (let i = 0; i < 20; i++) {
-      tendrils.push(
+      tendrils.current.push(
         new Tendril(
           Math.random() * worldWidthRef.current,
           -5,
@@ -376,7 +375,6 @@ function Leaf(props: any, ref: any) {
         ),
       )
     }
-    setTendrils(tendrils)
     setShowed(true)
   }
 
@@ -409,7 +407,7 @@ function Leaf(props: any, ref: any) {
       sceneRef.current!,
     )
 
-    setTendrils(v => ([...v, tendril]))
+    tendrils.current.push(tendril)
   }
 
   function init() {
@@ -456,7 +454,7 @@ function Leaf(props: any, ref: any) {
     requestAnimationFrame(animate)
     const elapsedTime = clock.getElapsedTime()
 
-    tendrils.forEach((tendril) => {
+    tendrils.current.forEach((tendril) => {
       tendril.update(elapsedTime)
     })
 
