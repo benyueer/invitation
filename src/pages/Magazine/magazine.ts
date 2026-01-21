@@ -9,6 +9,7 @@ import vertexShader from './shaders/vertex.glsl'
 interface Props {
   scene: THREE.Scene
   sizes: Size
+  onLoad: (progress: number) => void
 }
 
 interface ImageInfo {
@@ -55,10 +56,12 @@ export default class Magazine {
   }
 
   handlers: any[] = []
+  onLoad: (progress: number) => void
 
-  constructor({ scene, sizes }: Props) {
+  constructor({ scene, sizes, onLoad }: Props) {
     this.scene = scene
     this.sizes = sizes
+    this.onLoad = onLoad
 
     this.pageDimensions = {
       width: 2,
@@ -175,12 +178,17 @@ export default class Magazine {
   async loadTextureAtlas() {
     // Define your image paths
     const imagePaths = randomPick('webp', 'high', 20, 'v')
+    let loaded = 0
 
     // Load all images first to get their dimensions
     const imagePromises = imagePaths.map((path) => {
       return new Promise<HTMLImageElement>((resolve) => {
         const img = new Image()
-        img.onload = () => resolve(img)
+        img.onload = () => {
+          loaded++
+          this.onLoad(loaded / imagePaths.length)
+          resolve(img)
+        }
         img.src = path
       })
     })

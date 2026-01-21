@@ -6,6 +6,7 @@ import Magazine from './magazine'
 
 interface Props {
   scroll: Scroll
+  onProgress: any
 }
 
 export default class Canvas {
@@ -23,8 +24,9 @@ export default class Canvas {
   scroll: Scroll
   mediaInfoBlock: HTMLDivElement
   magazine: Magazine | undefined
+  onProgress: any
 
-  constructor({ scroll }: Props) {
+  constructor({ scroll, onProgress }: Props) {
     this.scroll = scroll
     this.element = document.getElementById('webgl') as HTMLCanvasElement
     this.mediaInfoBlock = document.getElementById(
@@ -42,6 +44,7 @@ export default class Canvas {
     this.createMagazine()
 
     this.render()
+    this.onProgress = onProgress
   }
 
   createScene() {
@@ -80,6 +83,9 @@ export default class Canvas {
     this.magazine = new Magazine({
       scene: this.scene!,
       sizes: this.sizes!,
+      onLoad: (progress: number) => {
+        this.onProgress(progress)
+      },
     })
   }
 
