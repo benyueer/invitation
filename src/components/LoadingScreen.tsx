@@ -3,9 +3,10 @@ import { useEffect, useRef } from "react";
 
 interface LoadingScreenProps {
   progress: number;
+  children?: React.ReactNode;
 }
 
-export default function LoadingScreen({ progress }: LoadingScreenProps) {
+export default function LoadingScreen({ progress, children }: LoadingScreenProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -57,12 +58,14 @@ export default function LoadingScreen({ progress }: LoadingScreenProps) {
         </div>
       </div>
 
+
       <div
         ref={textRef}
-        className="mt-8 text-red-700 text-2xl font-bold tracking-widest"
+        className="mt-8 text-red-700 text-2xl font-bold tracking-widest flex flex-col items-center"
         style={{ fontFamily: "uzxp" }}
       >
-        开启幸福时刻...
+        <span className="mb-4">开启幸福时刻... </span>
+        {children}
       </div>
 
       <div className="mt-4 w-48 h-1 bg-red-50 rounded-full overflow-hidden">

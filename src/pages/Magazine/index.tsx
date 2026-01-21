@@ -37,7 +37,11 @@ export default function Magazine() {
   return (
     <div className="h-[100dvh] text-amber-50/60 flex flex-col justify-between relative z-10 bg-[rgb(232_220_207)]">
       {
-        progress < 1 &&  <LoadingScreen progress={progress*10} />
+        progress < 1 && (
+          <LoadingScreen progress={progress * 10}>
+            <span className="mb-4 text-sm">每次打开都是不同的照片哦~~</span>
+          </LoadingScreen>
+        )
       }
       <canvas id="webgl"></canvas>
     </div>
