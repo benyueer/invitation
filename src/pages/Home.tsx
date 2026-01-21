@@ -1,28 +1,23 @@
 import {
-  CameraOutlined,
   EnvironmentOutlined,
-  FileTextOutlined,
-  FormOutlined,
-  HeartOutlined,
-  MessageOutlined,
-  VideoCameraOutlined,
 } from '@ant-design/icons'
 import { Input, message, Modal } from 'antd'
-import { useState } from 'react'
+import gsap from 'gsap'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const CARDS = [
-  { name: '相册1', path: '/hero', icon: <HeartOutlined /> },
-  { name: '相册2', path: '/vortex-gallery', icon: <CameraOutlined /> },
-  {
-    name: '相册3',
-    path: '/repeating-image-transition',
-    icon: <VideoCameraOutlined />,
-  },
-  { name: '相册4', path: '/infinity-canvas', icon: <FileTextOutlined /> },
-  { name: '相册5', path: '/rolling-image', icon: <FormOutlined /> },
-  { name: '相册6', path: '/magazine', icon: <MessageOutlined /> },
-]
+// const CARDS = [
+//   { name: '相册1', path: '/hero', icon: <HeartOutlined /> },
+//   { name: '相册2', path: '/vortex-gallery', icon: <CameraOutlined /> },
+//   {
+//     name: '相册3',
+//     path: '/repeating-image-transition',
+//     icon: <VideoCameraOutlined />,
+//   },
+//   { name: '相册4', path: '/infinity-canvas', icon: <FileTextOutlined /> },
+//   { name: '相册5', path: '/rolling-image', icon: <FormOutlined /> },
+//   { name: '相册6', path: '/magazine', icon: <MessageOutlined /> },
+// ]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -31,8 +26,35 @@ export default function Home() {
     name: '',
     message: '',
   })
+
+  useEffect(() => {
+    gsap.to('.ytdvvh', {
+      duration: 2,
+      autoAlpha: 1,
+      top: '50vh',
+      ease: 'power2.out',
+      width: '50vw',
+      height: '50vw',
+      left: '5vw',
+      rotateZ: '-460deg',
+    })
+    gsap.to('.bfgzxs', {
+      duration: 2,
+      autoAlpha: 1,
+      top: '48vh',
+      ease: 'power2.out',
+      width: '48vw',
+      height: '60vw',
+      right: '7vw',
+      rotateZ: '380deg',
+    })
+  }, [])
+
   const handleContactSubmit = () => {
-    console.log(contactInfo)
+    if (!contactInfo.name && !contactInfo.message) {
+      message.error('请填写留言')
+      return
+    }
     setIsContactModalOpen(false)
     fetch('/message', {
       method: 'POST',
@@ -60,9 +82,19 @@ export default function Home() {
         style={{ backgroundSize: '110%', backgroundPosition: '-10px 0' }}
       >
         <div
-          className="absolute top-50vh left-10vw w-50vw h-50vw z-10 transform rotate-z--80"
+          className="ytdvvh opacity-0 absolute top-30vh left--30vw w-20vw h-20vw z-11"
           style={{
             background: 'url(/pics/ytdvvh.png)',
+            backgroundSize: '100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+        </div>
+        <div
+          className="bfgzxs opacity-0 absolute top-30vh right--30vw w-20vw h-20vw z-10"
+          style={{
+            background: 'url(/pics/bfgzxs.png)',
             backgroundSize: '100%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
