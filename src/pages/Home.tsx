@@ -82,7 +82,7 @@ export default function Home() {
         style={{ backgroundSize: '110%', backgroundPosition: '-10px 0' }}
       >
         <div
-          className="ytdvvh opacity-0 absolute top-40vh left--30vw w-20vw h-20vw z-11"
+          className="ytdvvh opacity-0 absolute top-30vh left--30vw w-20vw h-20vw z-11"
           style={{
             background: 'url(/pics/ytdvvh.png)',
             backgroundSize: '100%',
@@ -92,7 +92,7 @@ export default function Home() {
         >
         </div>
         <div
-          className="bfgzxs opacity-0 absolute top-50vh right--30vw w-20vw h-20vw z-10"
+          className="bfgzxs opacity-0 absolute top-30vh right--30vw w-20vw h-20vw z-10"
           style={{
             background: 'url(/pics/bfgzxs.png)',
             backgroundSize: '100%',
