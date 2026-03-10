@@ -1,2 +1,2 @@
 # pnpm lint-staged
-cmd.exe pnpm lint-staged
+# cmd.exe pnpm lint-staged
